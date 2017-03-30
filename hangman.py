@@ -9,6 +9,7 @@ from random import randint
 
 
 def game_start():
+
     choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to guess a "
                    "random word): ")
     if choose.lower() == 'e':
@@ -23,7 +24,7 @@ def game_start():
                     raise ValueError
                 break
             except ValueError:
-                print("please only enter a 1, 2, or a 3")
+                print("Please only enter a 1, 2, or a 3")
         if level == 1:
             print("Easy selected")
             word_list = open("easy_list.txt", 'r').read()
@@ -107,9 +108,7 @@ def main():
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
 
         if random_letter.lower() == "y":
-            letter_index = randint(0, len(word) - 1)
-            value = scanner(word, word[letter_index], hidden_word)
-            hidden_word = value
+            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
 
         outcome = game(word, hidden_word)
 
