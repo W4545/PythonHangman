@@ -9,7 +9,6 @@ from random import randint
 
 
 def game_start():
-    level = ''
     choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to guess a "
                    "random word): ")
     if choose.lower() == 'e':
