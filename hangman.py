@@ -1,7 +1,7 @@
 # File Name: hangman
 # Programmer: Jack Young
 # Date Started: 3/1/2017
-# New comment
+
 
 import os
 import sys
