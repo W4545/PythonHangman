@@ -81,7 +81,14 @@ def game(word, hidden_word):
     limbs = 0
     guessed_letters = []
     while limbs < 6:
-        guess = input(hidden_word + "\n\nGuess a letter: ")
+        while True:
+            guess = input(hidden_word + "\n\nGuess a letter (Enter quit to exit): ")
+            if len(guess) == 1:
+                break
+            elif guess.lower() == 'quit':
+                sys.exit(0)
+            else:
+                print("Please input only one character")
         print("")
         guess = guess.lower()
         guessed_letters.append(guess)
