@@ -80,15 +80,21 @@ def scanner(word, guess, hidden_word):
 def game(word, hidden_word):
     limbs = 0
     guessed_letters = []
+    guess = ""
     while limbs < 6:
         while True:
-            guess = input(hidden_word + "\n\nGuess a letter (Enter quit to exit): ")
+            guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
             if len(guess) == 1:
                 break
             elif guess.lower() == 'quit':
                 sys.exit(0)
+            elif guess.lower() == word:
+                print("GOOD JOB! You guessed it!")
+                break
             else:
-                print("Please input only one character")
+                print("Oops. Wrong Guess. You will gain two limbs")
+                limbs += 2
+                display_man(limbs)
         print("")
         guess = guess.lower()
         guessed_letters.append(guess)
