@@ -128,7 +128,7 @@ def main():
         repeat.lower()
         if repeat == "n":
             break
-        elif repeat != "y" and repeat != "n":
+        elif repeat != "y":
             sys.exit(2)
 
 
