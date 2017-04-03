@@ -9,33 +9,39 @@ from random import randint
 
 
 def game_start():
-
+    word = ''
     level = 1
-    choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to guess a "
-                   "random word): ")
-    if choose.lower() == 'e':
-        word = input("Enter a word to guess: ")
-        word = word.lower()
-    else:
-        while True:
-            try:
-                level = int(input('What level of difficulty would you like? (Enter 1 for easy, 2 for medium, '
-                                  'and 3 for hard: '))
-                if level != 1 and level != 2 and level != 3:
-                    raise ValueError
-                break
-            except ValueError:
-                print("Please only enter a 1, 2, or a 3")
-        if level == 1:
-            print("Easy selected")
-            word_list = open("easy_list.txt", 'r').read()
-        elif level == 2:
-            word_list = open("medium_list.txt", 'r').read()
-        else:
-            word_list = open("hard_list.txt", 'r').read()
+    while True:
+        choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to "
+                       "guess a random word): ")
 
-        word_list = word_list.split("\n")
-        word = word_list[randint(0, len(word_list) - 1)]
+        if choose.lower() == 'e':
+            word = input("Enter a word to guess: ")
+            word = word.lower()
+            break
+        elif choose.lower() == 'r':
+            while True:
+                try:
+                    level = int(input('What level of difficulty would you like? (Enter 1 for easy, 2 for medium, '
+                                      'and 3 for hard: '))
+                    if level != 1 and level != 2 and level != 3:
+                        raise ValueError
+                    break
+                except ValueError:
+                    print("Please only enter a 1, 2, or a 3")
+            if level == 1:
+                print("Easy selected")
+                word_list = open("easy_list.txt", 'r').read()
+            elif level == 2:
+                word_list = open("medium_list.txt", 'r').read()
+            else:
+                word_list = open("hard_list.txt", 'r').read()
+
+            word_list = word_list.split("\n")
+            word = word_list[randint(0, len(word_list) - 1)]
+            break
+        else:
+            print("Invalid Entry.")
     return word
 
 
@@ -103,7 +109,6 @@ def main():
     while True:
         word = game_start()
         hidden_word = "_" * len(word)
-        os.system("cls")
 
         random_letter = input(
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
@@ -111,6 +116,7 @@ def main():
         if random_letter.lower() == "y":
             hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
 
+        os.system("cls")
         outcome = game(word, hidden_word)
 
         if outcome == 6:
