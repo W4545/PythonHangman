@@ -33,8 +33,10 @@ def game_start():
                 print("Easy selected")
                 word_list = open("easy_list.txt", 'r').read()
             elif level == 2:
+                print("Medium Selected")
                 word_list = open("medium_list.txt", 'r').read()
             else:
+                print("Hard Selected")
                 word_list = open("hard_list.txt", 'r').read()
 
             word_list = word_list.split("\n")
@@ -87,6 +89,7 @@ def game(word, hidden_word):
             guess = guess.lower()
             guessed_letters.append(guess)
             value = scanner(word, guess, hidden_word)
+
             if hidden_word == value:
                 limbs_lost += 1
                 display_man(limbs_lost)
