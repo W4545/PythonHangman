@@ -53,11 +53,11 @@ def assembling(list_of_stuff):
     return assembled
 
 
-def display_man(number_of_limbs):
+def display_man(number_of_limbs_lost):
     man = [" O\n", "/", "|", "\\\n", "/ ", "\\\n"]
     index = 0
-    for i in range(number_of_limbs):
-        if index <= number_of_limbs:
+    for i in range(number_of_limbs_lost):
+        if index <= number_of_limbs_lost:
             print(man[index], end="")
         index += 1
     print("")
@@ -78,35 +78,33 @@ def scanner(word, guess, hidden_word):
 
 
 def game(word, hidden_word):
-    limbs = 0
+    limbs_lost = 0
     guessed_letters = []
-    guess = ""
-    while limbs < 6:
-        while True:
-            guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
-            if len(guess) == 1:
-                break
-            elif guess.lower() == 'quit':
-                sys.exit(0)
-            elif guess.lower() == word:
-                print("GOOD JOB! You guessed it!")
-                break
-            else:
-                print("Oops. Wrong Guess. You will gain two limbs")
-                limbs += 2
-                display_man(limbs)
-        print("")
-        guess = guess.lower()
-        guessed_letters.append(guess)
-        value = scanner(word, guess, hidden_word)
+    while limbs_lost < 6:
 
-        if hidden_word == value:
-            limbs += 1
-            display_man(limbs)
-            print("Remaining Limbs:", 6-limbs)
+        guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
+        if len(guess) == 1:
+            guess = guess.lower()
+            guessed_letters.append(guess)
+            value = scanner(word, guess, hidden_word)
+            if hidden_word == value:
+                limbs_lost += 1
+                display_man(limbs_lost)
+                print("Remaining limbs:", 6 - limbs_lost)
+            else:
+                print("Good Guess!!")
+                hidden_word = value
+
+        elif guess.lower() == 'quit':
+            sys.exit(0)
+        elif guess.lower() == word:
+            print("GOOD JOB! You guessed it!")
+            hidden_word = word
         else:
-            print("Good Guess!!")
-            hidden_word = value
+            print("Oops. Wrong Guess. You will gain two limbs")
+            limbs_lost += 2
+            display_man(limbs_lost)
+        print("")
 
         if hidden_word == word:
             break
@@ -115,7 +113,7 @@ def game(word, hidden_word):
         for letter in guessed_letters:
             print(letter, end=" ")
         print("")
-    return limbs
+    return limbs_lost
 
 
 def main():
@@ -138,8 +136,7 @@ def main():
             print("You win!!!!!")
 
         repeat = input("Play again? (Y for yes, N for no): ")
-        repeat.lower()
-        if repeat == "n":
+        if repeat.lower() == "n":
             break
         elif repeat != "y":
             sys.exit(2)
