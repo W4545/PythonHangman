@@ -83,6 +83,7 @@ def scanner(word, guess, hidden_word):
 
 
 def game(word, hidden_word):
+    os.system('cls')
     limbs_lost = 0
     guessed_letters = []
     while limbs_lost < 6:
@@ -145,7 +146,6 @@ def main():
                 os.system('cls')
                 print("Incorrect Entry")
 
-        os.system("cls")
         outcome = game(word, hidden_word)
         os.system('cls')
 
