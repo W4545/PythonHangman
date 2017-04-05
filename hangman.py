@@ -12,7 +12,7 @@ def game_start():
     while True:
         choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to "
                        "guess a random word): ")
-
+        os.system('cls')
         if choose.lower() == 'e':
             word = input("Enter a word to guess: ")
             word = word.lower()
@@ -28,7 +28,9 @@ def game_start():
                         break
 
                 except ValueError:
+                    os.system('cls')
                     print("Please only enter a 1, 2, or a 3")
+            os.system('cls')
             if level == 1:
                 print("Easy selected")
                 word_list = open("easy_list.txt", 'r').read()
@@ -44,6 +46,7 @@ def game_start():
             break
         else:
             print("Invalid Entry.")
+    os.system('cls')
     return word
 
 
@@ -55,11 +58,11 @@ def assembling(list_of_stuff):
     return assembled
 
 
-def display_man(number_of_limbs_lost):
+def display_man(number_of_limbs):
     man = [" O\n", "/", "|", "\\\n", "/ ", "\\\n"]
     index = 0
-    for i in range(number_of_limbs_lost):
-        if index <= number_of_limbs_lost:
+    for i in range(number_of_limbs):
+        if index <= number_of_limbs:
             print(man[index], end="")
         index += 1
     print("")
@@ -84,6 +87,13 @@ def game(word, hidden_word):
     guessed_letters = []
     while limbs_lost < 6:
 
+        display_man(limbs_lost)
+        print("Remaining limbs:", 6 - limbs_lost)
+        print("Guessed letters: ", end="")
+        for letter in guessed_letters:
+            print(letter, end=" ")
+        print("")
+
         guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
         if len(guess) == 1:
             guess = guess.lower()
@@ -93,8 +103,7 @@ def game(word, hidden_word):
             if hidden_word == value:
                 os.system("cls")
                 limbs_lost += 1
-                display_man(limbs_lost)
-                print("Remaining limbs:", 6 - limbs_lost)
+
             else:
                 os.system("cls")
                 print("Good Guess!!")
@@ -110,16 +119,11 @@ def game(word, hidden_word):
             os.system("cls")
             print("Oops. Wrong Guess. You will gain two limbs")
             limbs_lost += 2
-            display_man(limbs_lost)
         print("")
 
         if hidden_word == word:
             break
 
-        print("Guessed letters: ", end="")
-        for letter in guessed_letters:
-            print(letter, end=" ")
-        print("")
     return limbs_lost
 
 
@@ -128,23 +132,37 @@ def main():
         word = game_start()
         hidden_word = "_" * len(word)
 
-        random_letter = input(
-            "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
-        if random_letter.lower() == "y":
-            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
+        while True:
+            random_letter = input(
+                "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
+
+            if random_letter.lower() == "y":
+                hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
+                break
+            elif random_letter.lower() == 'n':
+                break
+            else:
+                os.system('cls')
+                print("Incorrect Entry")
 
         os.system("cls")
         outcome = game(word, hidden_word)
+        os.system('cls')
 
-        if outcome == 6:
+        if outcome >= 6:
             print("You Lose!\nThe word was", word)
         else:
             print("You win!!!!!")
 
-        repeat = input("Play again? (Y for yes, N for no): ")
-        if repeat.lower() == "n":
-            break
-        elif repeat != "y":
-            sys.exit(2)
+        while True:
+            repeat = input("Play again? (Y for yes, N for no): ")
+            if repeat.lower() == "n":
+                sys.exit(0)
+            elif repeat.lower() == "y":
+                os.system('cls')
+                break
+            else:
+                os.system('cls')
+                print("Incorrect Entry")
 
 main()
