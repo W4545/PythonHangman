@@ -126,7 +126,6 @@ def main():
 
         random_letter = input(
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
-
         if random_letter.lower() == "y":
             hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
 
