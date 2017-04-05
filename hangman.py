@@ -3,51 +3,56 @@
 # Date Started: 3/1/2017
 
 
-import os
-import sys
-from random import randint
+import os  # Used to clear the command prompt
+import sys  # Used to properly exit the program
+from random import randint  # Used to randomly select a word from the lists
 
 
-def game_start():
-    while True:
+def game_start():  # Initiates the game by allowing the user to input a word or have the program select one
+    while True:  # Loops the game_start code to ensure the user inputs proper responses
         choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to "
                        "guess a random word): ")
-        os.system('cls')
-        if choose.lower() == 'e':
-            word = input("Enter a word to guess: ")
-            word = word.lower()
-            break
-        elif choose.lower() == 'r':
-            while True:
-                try:
+        os.system('cls')  # Clears the screen
+
+        if choose.lower() == 'e':  # If the user wants to enter a word
+            word = input("Enter a word to guess: ").lower()
+            break  # Breaks out of the while loop
+
+        elif choose.lower() == 'r':  # If the user wants the program to randomly select a word
+
+            while True:  # Loops input statement to ensure user inputs an appropriate response
+                try:  # If the user enters a response with letters in it, the code doesn't crash
                     level = int(input('What level of difficulty would you like? (Enter 1 for easy, 2 for medium, '
                                       'and 3 for hard: '))
-                    if level != 1 and level != 2 and level != 3:
-                        raise ValueError
+                    if level != 1 and level != 2 and level != 3:  # If the user didn't enter a 1, 2, or a 3
+                        raise ValueError  # Throws the same error to jump to the exception code
                     else:
                         break
 
-                except ValueError:
-                    os.system('cls')
+                except ValueError:  # Excepts the error to prevent the code from crashing
+                    os.system('cls')  # Clears the screen
                     print("Please only enter a 1, 2, or a 3")
-            os.system('cls')
-            if level == 1:
-                print("Easy selected")
-                word_list = open("easy_list.txt", 'r').read()
-            elif level == 2:
-                print("Medium Selected")
-                word_list = open("medium_list.txt", 'r').read()
-            else:
-                print("Hard Selected")
-                word_list = open("hard_list.txt", 'r').read()
+            os.system('cls')  # Clears the screen
 
-            word_list = word_list.split("\n")
-            word = word_list[randint(0, len(word_list) - 1)]
-            break
-        else:
+            if level == 1:  # If the user selected the easy word difficulty
+                print("Easy selected")
+                word_list = open("easy_list.txt", 'r').read()  # Load the easy word list
+
+            elif level == 2:  # If the user selected the medium word difficulty
+                print("Medium Selected")
+                word_list = open("medium_list.txt", 'r').read()  # Load the medium word list
+
+            else:  # Since all possible values are either a 1, 2, or a 3, the only left option is the hard difficulty
+                print("Hard Selected")
+                word_list = open("hard_list.txt", 'r').read()  # Load the hard word list
+
+            word_list = word_list.split("\n")  # Convert the string word_list to a list
+            word = word_list[randint(0, len(word_list) - 1)]  # assign a random word from the list to the variable word
+            break  # Break out of the while loop
+        else:  # If the user entered an incorrect input
             print("Invalid Entry.")
-    os.system('cls')
-    return word
+    os.system('cls')  # Clears the screen
+    return word  # Returns the word
 
 
 def assembling(list_of_stuff):
