@@ -24,7 +24,9 @@ def game_start():
                                       'and 3 for hard: '))
                     if level != 1 and level != 2 and level != 3:
                         raise ValueError
-                    break
+                    else:
+                        break
+
                 except ValueError:
                     print("Please only enter a 1, 2, or a 3")
             if level == 1:
@@ -120,7 +122,6 @@ def game(word, hidden_word):
         print("")
     return limbs_lost
 
-# what
 
 def main():
     while True:
