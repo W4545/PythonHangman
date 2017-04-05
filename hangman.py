@@ -91,19 +91,23 @@ def game(word, hidden_word):
             value = scanner(word, guess, hidden_word)
 
             if hidden_word == value:
+                os.system("cls")
                 limbs_lost += 1
                 display_man(limbs_lost)
                 print("Remaining limbs:", 6 - limbs_lost)
             else:
+                os.system("cls")
                 print("Good Guess!!")
                 hidden_word = value
 
         elif guess.lower() == 'quit':
             sys.exit(0)
         elif guess.lower() == word:
+            os.system("cls")
             print("GOOD JOB! You guessed it!")
             hidden_word = word
         else:
+            os.system("cls")
             print("Oops. Wrong Guess. You will gain two limbs")
             limbs_lost += 2
             display_man(limbs_lost)
