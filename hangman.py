@@ -120,6 +120,7 @@ def game(word, hidden_word):
         print("")
     return limbs_lost
 
+# what
 
 def main():
     while True:
