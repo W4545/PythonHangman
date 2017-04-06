@@ -163,15 +163,15 @@ def main():
         else:  # If the user didn't hang the man, they guessed the complete word
             print("You win!!!!!")
 
-        while True:  # While the user
+        while True:  # Ensures correct response to question
             repeat = input("Play again? (Y for yes, N for no): ")
-            if repeat.lower() == "n":
-                sys.exit(0)
-            elif repeat.lower() == "y":
-                os.system('cls')
+            if repeat.lower() == "n":  # If the user doesn't want to continue playing
+                sys.exit(0)  # Exits the program
+            elif repeat.lower() == "y":  # If the user wants to keep playing
+                os.system('cls')  # Clears the screen
                 break
             else:
-                os.system('cls')
+                os.system('cls')  # Clears the screen
                 print("Incorrect Entry")
 
 main()
