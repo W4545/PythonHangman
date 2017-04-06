@@ -52,7 +52,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
         else:  # If the user entered an incorrect input
             print("Invalid Entry.")
 
-    hidden_word = "_" * len(word)
+    hidden_word = "_" * len(word)  # Generates the empty spaces for the word
 
     while True:  # Continues to loop until proper response is given
         random_letter = input(
@@ -106,7 +106,7 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
     os.system('cls')  # Clears screen
     limbs_lost = 0
     guessed_letters = []
-    while limbs_lost < 6:  # While the man is not completely hung. If the man is completely hung, the game will end.
+    while limbs_lost < 6:  # While the man is not completely hanged. If the man is completely hanged, the game will end.
 
         display_man(limbs_lost)  # Displays the man
         print("Remaining limbs:", 6 - limbs_lost)
