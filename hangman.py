@@ -51,8 +51,25 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             break  # Break out of the while loop
         else:  # If the user entered an incorrect input
             print("Invalid Entry.")
+
+    hidden_word = "_" * len(word)
+
+    while True:  # Continues to loop until proper response is given
+        random_letter = input(
+            "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
+
+        if random_letter.lower() == "y":  # If the user wants to start with a random letter
+            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
+            break
+        elif random_letter.lower() == 'n':  # If the user doesn't want a random letter
+            break
+        else:
+            os.system('cls')
+            print("Incorrect Entry")
+
     os.system('cls')  # Clears the screen
-    return word  # Returns the word
+
+    return word, hidden_word  # Returns the word and hidden word
 
 
 def assembling(list_of_stuff):  # Inputs a list of letters and assembles them into a word
@@ -134,32 +151,19 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
 
 
 def main():
-    while True:
-        word = game_start()
-        hidden_word = "_" * len(word)
+    while True:  # While the user wants to play the game
 
-        while True:
-            random_letter = input(
-                "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
+        word, hidden_word = game_start()  # Initiates user setup of the game and assigns the word and hidden word
 
-            if random_letter.lower() == "y":
-                hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
-                break
-            elif random_letter.lower() == 'n':
-                break
-            else:
-                os.system('cls')
-                print("Incorrect Entry")
+        outcome = game(word, hidden_word)  # Starts the main game loop and returns the number of limbs hanged
+        os.system('cls')  # Clears the screen
 
-        outcome = game(word, hidden_word)
-        os.system('cls')
-
-        if outcome >= 6:
+        if outcome >= 6:  # If the user completely hung the man
             print("You Lose!\nThe word was", word)
-        else:
+        else:  # If the user didn't hang the man, they guessed the complete word
             print("You win!!!!!")
 
-        while True:
+        while True:  # While the user
             repeat = input("Play again? (Y for yes, N for no): ")
             if repeat.lower() == "n":
                 sys.exit(0)
@@ -170,4 +174,4 @@ def main():
                 os.system('cls')
                 print("Incorrect Entry")
 
-display_man(0)
+main()
