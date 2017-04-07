@@ -1,5 +1,4 @@
 # File Name: hangman
-# Programmer: Jack Young
 # Date Started: 3/1/2017
 
 
@@ -135,6 +134,18 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
                 os.system("cls")  # Clears screen
                 print("Good Guess!!")
                 hidden_word = value  # Updates the hidden word to include the guessed letter
+
+        elif guess == "DEBUG_WORD":
+            os.system('cls')
+            print(word)
+
+        elif guess == "DEBUG_LIMB":
+            os.system('cls')
+            limbs_lost -= 1
+
+        elif guess == "DEBUG_HINT":
+            os.system('cls')
+            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
 
         elif guess.lower() == 'quit':  # If the user typed "quit"
             sys.exit(0)  # Exits the program
