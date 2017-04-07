@@ -37,15 +37,18 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             if level == 1:  # If the user selected the easy word difficulty
                 print("Easy selected")
                 word_list = open("easy_list.txt", 'r').read()  # Load the easy word list
-
+    # Source:
+    # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
             elif level == 2:  # If the user selected the medium word difficulty
                 print("Medium Selected")
                 word_list = open("medium_list.txt", 'r').read()  # Load the medium word list
-
+    # Source:
+    # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-medium.txt
             else:  # Since all possible values are either a 1, 2, or a 3, the only left option is the hard difficulty
                 print("Hard Selected")
                 word_list = open("hard_list.txt", 'r').read()  # Load the hard word list
-
+    # Source:
+    # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
             word_list = word_list.split("\n")  # Convert the string word_list to a list
             word = word_list[randint(0, len(word_list) - 1)]  # assign a random word from the list to the variable word
             break  # Break out of the while loop
