@@ -8,8 +8,6 @@ from random import randint
 
 
 def game_start():  # Initiates the game by allowing the user to input a word or have the program select one
-    level = -1
-    word = 0
     while True:  # Loops the game_start code to ensure the user inputs proper responses
         choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to "
                        "guess a random word): ")
