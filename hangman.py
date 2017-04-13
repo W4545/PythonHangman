@@ -119,42 +119,36 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
         print("")
 
         guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
+        os.system("cls")  # Clears screen
         if len(guess) == 1:  # If the user entered a single letter
             guess = guess.lower()
             guessed_letters.append(guess)  # Adds the letter to the list of guessed letters
             value = scanner(word, guess, hidden_word)  # Scans the word and reveals the guessed letter
 
             if hidden_word == value:  # If the scanner didn't find the letter in the word
-                os.system("cls")  # Clears screen
                 limbs_lost += 1
 
             else:  # The user successfully found a letter
-                os.system("cls")  # Clears screen
                 print("Good Guess!!")
                 hidden_word = value  # Updates the hidden word to include the guessed letter
 
         elif guess == "DEBUG_WORD":
-            os.system('cls')
             print(word)
 
         elif guess == "DEBUG_LIMB":
-            os.system('cls')
             limbs_lost -= 1
 
         elif guess == "DEBUG_HINT":
-            os.system('cls')
             hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
 
         elif guess.lower() == 'quit':  # If the user typed "quit"
             sys.exit(0)  # Exits the program
 
         elif guess.lower() == word:  # If the user successfully guess the whole word
-            os.system("cls")  # Clears screen
             print("GOOD JOB! You guessed it!")
             hidden_word = word  # Assigns the hidden word to the unhidden word
 
         else:  # The user attempted to guess the whole word but failed.
-            os.system("cls")
             print("Oops. Wrong Guess. You will gain two limbs")
             limbs_lost += 2
         print("")  # Prints empty line
