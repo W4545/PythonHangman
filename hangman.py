@@ -174,13 +174,12 @@ def main():
 
         while True:  # Ensures correct response to question
             repeat = input("Play again? (Y for yes, N for no): ")
+            os.system('cls')  # Clears the screen
             if repeat.lower() == "n":  # If the user doesn't want to continue playing
                 sys.exit(0)  # Exits the program
             elif repeat.lower() == "y":  # If the user wants to keep playing
-                os.system('cls')  # Clears the screen
                 break  # Breaks out of while loop
             else:
-                os.system('cls')  # Clears the screen
                 print("Incorrect Entry")
 
 main()
