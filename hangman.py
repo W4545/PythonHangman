@@ -133,13 +133,13 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
                 hidden_word = value  # Updates the hidden word to include the guessed letter
 
         elif guess == "DEBUG_WORD":
-            print(word)
+            print(word)  # Shows the word
 
         elif guess == "DEBUG_LIMB":
-            limbs_lost -= 1
+            limbs_lost -= 1  # Decreases the limb
 
         elif guess == "DEBUG_HINT":
-            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
+            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)  # Reveals a letter
 
         elif guess.lower() == 'quit':  # If the user typed "quit"
             sys.exit(0)  # Exits the program
