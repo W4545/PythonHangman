@@ -58,6 +58,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
     hidden_word = "_" * len(word)  # Generates the empty spaces for the word
 
     while True:  # Continues to loop until proper response is given
+        os.system('cls')  # Clears the screen
         random_letter = input(
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
 
@@ -67,7 +68,6 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
         elif random_letter.lower() == 'n':  # If the user doesn't want a random letter
             break  # Breaks out of while loop
         else:
-            os.system('cls')
             print("Incorrect Entry")
 
     os.system('cls')  # Clears the screen
