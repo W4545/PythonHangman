@@ -6,16 +6,23 @@ import os
 import sys
 from random import randint
 
+if os.name == 'posix':  # If the current operating system is linux
+    clear_screen_command = 'tput reset'  # Sets the linux clear screen command
+elif os.name == 'nt':  # If the current operating system is windows
+    clear_screen_command = 'cls'  # Sets the windows clear screen command
+else:
+    sys.exit('Invalid Operating System')  # Otherwise exit the program
+
 
 def game_start():  # Initiates the game by allowing the user to input a word or have the program select one
     while True:  # Loops the game_start code to ensure the user inputs proper responses
         choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to "
                        "guess a random word): ")
-        os.system('cls')  # Clears the screen
+        os.system(clear_screen_command)  # Clears the screen
 
         if choose.lower() == 'e':  # If the user wants to enter a word
             word = input("Enter a word to guess: ").lower()
-            os.system('cls')  # Clears the screen
+            os.system(clear_screen_command)  # Clears the screen
             break  # Breaks out of the while loop
 
         elif choose.lower() == 'r':  # If the user wants the program to randomly select a word
@@ -30,9 +37,9 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
                         break
 
                 except ValueError:  # Excepts the error to prevent the code from crashing
-                    os.system('cls')  # Clears the screen
+                    os.system(clear_screen_command)  # Clears the screen
                     print("Please only enter a 1, 2, or a 3")
-            os.system('cls')  # Clears the screen
+            os.system(clear_screen_command)  # Clears the screen
 
             if level == 1:  # If the user selected the easy word difficulty
                 print("Easy selected")
@@ -58,7 +65,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
     hidden_word = "_" * len(word)  # Generates the empty spaces for the word
 
     while True:  # Continues to loop until proper response is given
-        os.system('cls')  # Clears the screen
+        os.system(clear_screen_command)  # Clears the screen
         random_letter = input(
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
 
@@ -70,7 +77,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
         else:
             print("Incorrect Entry")
 
-    os.system('cls')  # Clears the screen
+    os.system(clear_screen_command)  # Clears the screen
 
     return word, hidden_word  # Returns the word and hidden word
 
@@ -106,7 +113,7 @@ def scanner(word, guess, hidden_word):  # Inputs the word, the letter guessed, a
 
 
 def game(word, hidden_word):  # Inputs the word to guess and the hidden word
-    os.system('cls')  # Clears screen
+    os.system(clear_screen_command)  # Clears screen
     limbs_lost = 0
     guessed_letters = []
     while limbs_lost < 6:  # While the man is not completely hanged. If the man is completely hanged, the game will end.
@@ -119,7 +126,7 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
         print("")
 
         guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
-        os.system("cls")  # Clears screen
+        os.system(clear_screen_command)  # Clears screen
         if len(guess) == 1:  # If the user entered a single letter
             guess = guess.lower()
             guessed_letters.append(guess)  # Adds the letter to the list of guessed letters
@@ -165,7 +172,7 @@ def main():
         word, hidden_word = game_start()  # Initiates user setup of the game and assigns the word and hidden word
 
         outcome = game(word, hidden_word)  # Starts the main game loop and returns the number of limbs hanged
-        os.system('cls')  # Clears the screen
+        os.system(clear_screen_command)  # Clears the screen
 
         if outcome >= 6:  # If the user completely hanged the man
             print("You Lose!\nThe word was", word)
@@ -174,7 +181,7 @@ def main():
 
         while True:  # Ensures correct response to question
             repeat = input("Play again? (Y for yes, N for no): ")
-            os.system('cls')  # Clears the screen
+            os.system(clear_screen_command)  # Clears the screen
             if repeat.lower() == "n":  # If the user doesn't want to continue playing
                 sys.exit(0)  # Exits the program
             elif repeat.lower() == "y":  # If the user wants to keep playing
