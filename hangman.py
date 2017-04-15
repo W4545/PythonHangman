@@ -147,10 +147,7 @@ def game(word, hidden_word, revealed_letter):  # Inputs the word to guess, the h
             print(word)  # Shows the word
 
         elif guess == "DEBUG_LIMB":
-            limbs_lost -= 1  # Decreases the limb
-
-        elif guess == "DEBUG_HINT":
-            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)  # Reveals a letter
+            limbs_lost -= 1  # Decreases the limbs
 
         elif guess == "":  # If the user accidentally hit enter
             continue
