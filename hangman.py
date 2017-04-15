@@ -13,6 +13,9 @@ elif os.name == 'nt':  # If the current operating system is windows
 else:
     sys.exit('Invalid Operating System')  # Otherwise exit the program
 
+if hasattr(sys, '_MEIPASS'):
+    os.chdir(sys._MEIPASS)
+
 
 def game_start():  # Initiates the game by allowing the user to input a word or have the program select one
     os.system(clear_screen_command)  # Clears the screen
@@ -32,12 +35,12 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
                 os.system(clear_screen_command)  # Clears the screen
                 if level == '1':  # If the user didn't enter a 1
                     print("Normal selected")
-                    word_list = open("medium_list.txt", 'r').read()  # Load the normal word list
+                    word_list = open("src\medium_list.txt", 'r').read()  # Load the normal word list
         # Source:
         # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-medium.txt
                 elif level == '2':  # If the user entered a 2
                     print("Hard Selected")
-                    word_list = open("hard_list.txt", 'r').read()  # Load the hard word list
+                    word_list = open("src\hard_list.txt", 'r').read()  # Load the hard word list
         # Source:
         # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
                 else:
