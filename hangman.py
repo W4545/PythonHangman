@@ -15,6 +15,7 @@ else:
 
 
 def game_start():  # Initiates the game by allowing the user to input a word or have the program select one
+    os.system(clear_screen_command)  # Clears the screen
     while True:  # Loops the game_start code to ensure the user inputs proper responses
         choose = input("Would you like to enter a word or guess a random word? (Enter E to enter a word or R to "
                        "guess a random word): ")
@@ -30,7 +31,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             while True:  # Loops input statement to ensure user inputs an appropriate response
                 try:  # If the user enters a response with letters in it, the code doesn't crash
                     level = int(input('What level of difficulty would you like? (Enter 1 for easy, 2 for medium, '
-                                      'and 3 for hard: '))
+                                      'and 3 for hard): '))
                     if level != 1 and level != 2 and level != 3:  # If the user didn't enter a 1, 2, or a 3
                         raise ValueError  # Throws the same error to jump to the exception code
                     else:
@@ -177,7 +178,7 @@ def main():
         if outcome >= 6:  # If the user completely hanged the man
             print("You Lose!\nThe word was", word)
         else:  # If the user didn't hang the man, they guessed the complete word
-            print("You win!!!!!")
+            print("You win!!!!!\nYou successfully guessed the word", word, "!!!!")
 
         while True:  # Ensures correct response to question
             repeat = input("Play again? (Y for yes, N for no): ")
