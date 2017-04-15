@@ -24,7 +24,6 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
         if choose.lower() == 'e':  # If the user wants to enter a word
             word = input("Enter a word to guess: ").lower()
             os.system(clear_screen_command)  # Clears the screen
-            break  # Breaks out of the while loop
 
         elif choose.lower() == 'r':  # If the user wants the program to randomly select a word
             os.system(clear_screen_command)  # Clears the screen
@@ -43,15 +42,15 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
         # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
                 else:
                     print("Please only enter a 1 or a 2")
-                    continue
-                break
-
+                    continue  # Restarts while loop
+                break  # break out of while loop
             word_list = word_list.split("\n")  # Convert the string word_list to a list
             word = word_list[randint(0, len(word_list) - 1)]  # assign a random word from the list to the variable word
-            break  # Break out of the while loop
         else:  # If the user entered an incorrect input
             os.system(clear_screen_command)  # Clears the screen
             print("Invalid Entry.")
+            continue  # Restarts while loop
+        break
 
     hidden_word = "_" * len(word)  # Generates the empty spaces for the word
 
@@ -62,13 +61,13 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
         if random_letter.lower() == "y":  # If the user wants to start with a random letter
             guessed_letter = word[randint(0, len(word) - 1)]
             hidden_word = scanner(word, guessed_letter, hidden_word)
-            break  # Breaks out of while loop
         elif random_letter.lower() == 'n':  # If the user doesn't want a random letter
             guessed_letter = ''  # Ensures a letter doesn't get added to the guessed letters list
-            break  # Breaks out of while loop
         else:
             os.system(clear_screen_command)  # Clears the screen
             print("Incorrect Entry")
+            continue  # Restarts while loop
+        break
 
     os.system(clear_screen_command)  # Clears the screen
 
@@ -133,10 +132,10 @@ def game(word, hidden_word, revealed_letter):  # Inputs the word to guess, the h
                 print("Good Guess!!")
                 hidden_word = value  # Updates the hidden word to include the guessed letter
 
-        elif guess == "DEBUG_WORD":
+        elif guess == "DEBUG_WORD" or guess == '001':
             print(word)  # Shows the word
 
-        elif guess == "DEBUG_LIMB":
+        elif guess == "DEBUG_LIMB" or guess == '002':
             limbs_lost -= 1  # Decreases the limbs
 
         elif guess == "":  # If the user accidentally hit enter
