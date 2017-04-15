@@ -27,46 +27,35 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             break  # Breaks out of the while loop
 
         elif choose.lower() == 'r':  # If the user wants the program to randomly select a word
-
-            while True:  # Loops input statement to ensure user inputs an appropriate response
-                try:  # If the user enters a response with letters in it, the code doesn't crash
-                    level = int(input('What level of difficulty would you like? (Enter 1 for easy, 2 for medium, '
-                                      'and 3 for hard): '))
-                    if level != 1 and level != 2 and level != 3:  # If the user didn't enter a 1, 2, or a 3
-                        raise ValueError  # Throws the same error to jump to the exception code
-                    else:
-                        break
-
-                except ValueError:  # Excepts the error to prevent the code from crashing
-                    os.system(clear_screen_command)  # Clears the screen
-                    print("Please only enter a 1, 2, or a 3")
             os.system(clear_screen_command)  # Clears the screen
+            while True:  # Loops input statement to ensure user inputs an appropriate response
+                level = input('What level of difficulty would you like? (Enter 1 for normal and 2 for hard): ')
+                os.system(clear_screen_command)  # Clears the screen
+                if level == '1':  # If the user didn't enter a 1
+                    print("Normal selected")
+                    word_list = open("medium_list.txt", 'r').read()  # Load the normal word list
+        # Source:
+        # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-medium.txt
+                elif level == '2':  # If the user entered a 2
+                    print("Hard Selected")
+                    word_list = open("hard_list.txt", 'r').read()  # Load the hard word list
+        # Source:
+        # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
+                else:
+                    print("Please only enter a 1 or a 2")
+                    continue
+                break
 
-            if level == 1:  # If the user selected the easy word difficulty
-                print("Easy selected")
-                word_list = open("easy_list.txt", 'r').read()  # Load the easy word list
-    # Source:
-    # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
-            elif level == 2:  # If the user selected the medium word difficulty
-                print("Medium Selected")
-                word_list = open("medium_list.txt", 'r').read()  # Load the medium word list
-    # Source:
-    # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-medium.txt
-            else:  # Since all possible values are either a 1, 2, or a 3, the only left option is the hard difficulty
-                print("Hard Selected")
-                word_list = open("hard_list.txt", 'r').read()  # Load the hard word list
-    # Source:
-    # https://github.com/first20hours/google-10000-english/blob/master/google-10000-english-usa-no-swears-long.txt
             word_list = word_list.split("\n")  # Convert the string word_list to a list
             word = word_list[randint(0, len(word_list) - 1)]  # assign a random word from the list to the variable word
             break  # Break out of the while loop
         else:  # If the user entered an incorrect input
+            os.system(clear_screen_command)  # Clears the screen
             print("Invalid Entry.")
 
     hidden_word = "_" * len(word)  # Generates the empty spaces for the word
 
     while True:  # Continues to loop until proper response is given
-        os.system(clear_screen_command)  # Clears the screen
         random_letter = input(
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
 
@@ -78,6 +67,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             guessed_letter = ''  # Ensures a letter doesn't get added to the guessed letters list
             break  # Breaks out of while loop
         else:
+            os.system(clear_screen_command)  # Clears the screen
             print("Incorrect Entry")
 
     os.system(clear_screen_command)  # Clears the screen
@@ -120,7 +110,7 @@ def game(word, hidden_word, revealed_letter):  # Inputs the word to guess, the h
     limbs_lost = 0
     guessed_letters = []
     guessed_letters += revealed_letter
-    while limbs_lost < 6:  # While the man is not completely hanged. If the man is completely hanged, the game will end.
+    while limbs_lost < 6:  # While the
 
         display_man(limbs_lost)  # Displays the man
         print("Remaining limbs:", 6 - limbs_lost)
