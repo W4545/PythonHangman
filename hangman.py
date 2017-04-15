@@ -71,16 +71,18 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             "Would you like to start with a guessed letter in the word? (enter Y for yes or N for no): ")
 
         if random_letter.lower() == "y":  # If the user wants to start with a random letter
-            hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)
+            guessed_letter = word[randint(0, len(word) - 1)]
+            hidden_word = scanner(word, guessed_letter, hidden_word)
             break  # Breaks out of while loop
         elif random_letter.lower() == 'n':  # If the user doesn't want a random letter
+            guessed_letter = ''  # Ensures a letter doesn't get added to the guessed letters list
             break  # Breaks out of while loop
         else:
             print("Incorrect Entry")
 
     os.system(clear_screen_command)  # Clears the screen
 
-    return word, hidden_word  # Returns the word and hidden word
+    return word, hidden_word, guessed_letter  # Returns the word, the hidden word, and the guessed letter
 
 
 def assembling(list_of_stuff):  # Inputs a list of letters and assembles them into a word
@@ -113,10 +115,11 @@ def scanner(word, guess, hidden_word):  # Inputs the word, the letter guessed, a
     return assembling(new_hidden)  # Returns the hidden word as a string after being reassembled
 
 
-def game(word, hidden_word):  # Inputs the word to guess and the hidden word
+def game(word, hidden_word, revealed_letter):  # Inputs the word to guess, the hidden word, and the revealed letter
     os.system(clear_screen_command)  # Clears screen
     limbs_lost = 0
     guessed_letters = []
+    guessed_letters += revealed_letter
     while limbs_lost < 6:  # While the man is not completely hanged. If the man is completely hanged, the game will end.
 
         display_man(limbs_lost)  # Displays the man
@@ -149,6 +152,9 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
         elif guess == "DEBUG_HINT":
             hidden_word = scanner(word, word[randint(0, len(word) - 1)], hidden_word)  # Reveals a letter
 
+        elif guess == "":  # If the user accidentally hit enter
+            continue
+
         elif guess.lower() == 'quit':  # If the user typed "quit"
             sys.exit(0)  # Exits the program
 
@@ -170,9 +176,12 @@ def game(word, hidden_word):  # Inputs the word to guess and the hidden word
 def main():
     while True:  # While the user wants to play the game
 
-        word, hidden_word = game_start()  # Initiates user setup of the game and assigns the word and hidden word
+        word, hidden_word, revealed_letter = game_start()
+        # Initiates user setup of the game and assigns the word, hidden word, and the initial hidden letter
 
-        outcome = game(word, hidden_word)  # Starts the main game loop and returns the number of limbs hanged
+        outcome = game(word, hidden_word, revealed_letter)
+        # Starts the main game loop and returns the number of limbs hanged
+
         os.system(clear_screen_command)  # Clears the screen
 
         if outcome >= 6:  # If the user completely hanged the man
