@@ -1,6 +1,6 @@
 # File Name: hangman
 # Date Started: 3/1/2017
-
+# Icon made by Freepik from www.flaticon.com
 
 import os
 import sys
@@ -13,8 +13,10 @@ elif os.name == 'nt':  # If the current operating system is windows
 else:
     sys.exit('Invalid Operating System')  # Otherwise exit the program
 
-if hasattr(sys, '_MEIPASS'):
-    os.chdir(sys._MEIPASS)
+#  User: ashes999
+if hasattr(sys, '_MEIPASS'):  # If the code is running from a .exe file
+    os.chdir(sys._MEIPASS)  # Changes the active directory to the temporary directory created by the .exe file
+#  Source: http://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile
 
 
 def game_start():  # Initiates the game by allowing the user to input a word or have the program select one
