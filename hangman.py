@@ -125,6 +125,11 @@ def game(word, hidden_word, revealed_letter):  # Inputs the word to guess, the h
 
         guess = input(hidden_word + "\n\nGuess a letter or the whole word(Enter quit to exit): ")
         os.system(clear_screen_command)  # Clears screen
+
+        if guess in guessed_letters:  # If the letter has been already guessed
+            print("Letter already guessed.")
+            continue  # Restarts at the top of the while loop
+
         if len(guess) == 1:  # If the user entered a single letter
             guess = guess.lower()
             guessed_letters.append(guess)  # Adds the letter to the list of guessed letters
