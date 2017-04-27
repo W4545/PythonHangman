@@ -31,7 +31,6 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
             word = input("Enter a word to guess: ").lower()
             if " " in word:
                 print("incorrect entry")
-                os.system(clear_screen_command)
                 continue
 
             os.system(clear_screen_command)  # Clears the screen
