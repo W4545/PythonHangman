@@ -33,6 +33,7 @@ def game_start():  # Initiates the game by allowing the user to input a word or 
                 print("incorrect entry")
                 os.system(clear_screen_command)
                 continue
+
             os.system(clear_screen_command)  # Clears the screen
 
         elif choose.lower() == 'r':  # If the user wants the program to randomly select a word
