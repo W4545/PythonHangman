@@ -13,6 +13,7 @@ elif os.name == 'nt':  # If the current operating system is windows
 else:
     sys.exit('Invalid Operating System')  # Otherwise exit the program
 
+
 #  User: ashes999
 if hasattr(sys, '_MEIPASS'):  # If the code is running from a .exe file
     os.chdir(sys._MEIPASS)  # Changes the active directory to the temporary directory created by the .exe file
