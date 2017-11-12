@@ -137,6 +137,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-.idea/create_task.iml
-.idea/workspace.xml
-.idea/vcs.xml
